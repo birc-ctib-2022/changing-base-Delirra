@@ -28,5 +28,22 @@ def change_to_base(n: int, b: int) -> str:
     >>> change_to_base(31, 16)
     '1F'
     """
+
+
+    reversed_digits = []
+
+    quotient, remainder = abs(n), abs(n) % b
+
+    while quotient > 0 and remainder > 0:
+        reversed_digits.append(digits[remainder])
+        quotient = quotient // b
+        remainder = quotient % b
+
     assert 2 <= b <= 16
-    return ''  # FIXME: return n in the right base
+
+    if n == 0:
+        return '0'
+    elif n < 0:
+        return '-' + ''.join(reversed_digits[::-1]) # This seems a little cheeky...
+    else:
+        return ''.join(reversed_digits[::-1])  # FIXME: return n in the right base
